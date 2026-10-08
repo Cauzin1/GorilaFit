@@ -1,0 +1,16 @@
+[features]
+seeds = true
+skip-lint = false
+
+[programs.devnet]
+golias_commit = "9Aa5qLry7p6rtJhevZ3ugFyffGqffvvcgEmdTq4LX75Z"
+
+[programs.localnet]
+golias_commit = "9Aa5qLry7p6rtJhevZ3ugFyffGqffvvcgEmdTq4LX75Z"
+
+[provider]
+cluster = "devnet"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"

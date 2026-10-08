@@ -1,0 +1,33 @@
+{
+  "name": "app",
+  "private": true,
+  "version": "0.1.0",
+  "main": "App.tsx",
+  "scripts": {
+    "start": "expo start --dev-client",
+    "android": "expo run:android",
+    "ios": "expo run:ios"
+  },
+  "dependencies": {
+    "@coral-xyz/anchor": "0.30.1",
+    "@solana-mobile/mobile-wallet-adapter-protocol": "^2.1.0",
+    "@solana-mobile/mobile-wallet-adapter-protocol-web3js": "^2.1.0",
+    "@solana/spl-token": "^0.4.15",
+    "@solana/web3.js": "^1.98.0",
+    "bs58": "^6.0.0",
+    "expo": "~51.0.0",
+    "expo-camera": "~15.0.0",
+    "expo-font": "~12.0.9",
+    "expo-status-bar": "~1.12.0",
+    "lucide-react-native": "^1.52.0",
+    "react": "18.2.0",
+    "react-native": "0.74.5",
+    "react-native-qrcode-svg": "^6.3.0",
+    "react-native-svg": "15.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.43",
+    "@types/react": "^18.3.0",
+    "typescript": "^5.4.0"
+  }
+}

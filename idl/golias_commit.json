@@ -1,0 +1,150 @@
+{
+  "version": "0.1.0",
+  "name": "golias_commit",
+  "address": "9Aa5qLry7p6rtJhevZ3ugFyffGqffvvcgEmdTq4LX75Z",
+  "metadata": { "address": "9Aa5qLry7p6rtJhevZ3ugFyffGqffvvcgEmdTq4LX75Z" },
+  "instructions": [
+    {
+      "name": "initializeConfig",
+      "accounts": [
+        { "name": "admin", "isMut": true, "isSigner": true },
+        { "name": "verifierAuthority", "isMut": false, "isSigner": false },
+        { "name": "skrMint", "isMut": false, "isSigner": false },
+        { "name": "fitcoinMint", "isMut": false, "isSigner": false },
+        { "name": "config", "isMut": true, "isSigner": false },
+        { "name": "vaultAuthority", "isMut": false, "isSigner": false },
+        { "name": "vault", "isMut": true, "isSigner": false },
+        { "name": "tokenProgram", "isMut": false, "isSigner": false },
+        { "name": "systemProgram", "isMut": false, "isSigner": false }
+      ],
+      "args": [
+        { "name": "bonusBps", "type": "u16" },
+        { "name": "fitcoinPerWorkout", "type": "u64" },
+        { "name": "periodUnitSecs", "type": "i64" },
+        { "name": "minSessionSecs", "type": "i64" },
+        { "name": "maxSessionSecs", "type": "i64" }
+      ]
+    },
+    {
+      "name": "registerGym",
+      "accounts": [
+        { "name": "config", "isMut": true, "isSigner": false },
+        { "name": "admin", "isMut": true, "isSigner": true },
+        { "name": "gymAuthority", "isMut": false, "isSigner": false },
+        { "name": "gym", "isMut": true, "isSigner": false },
+        { "name": "systemProgram", "isMut": false, "isSigner": false }
+      ],
+      "args": [{ "name": "name", "type": "string" }]
+    },
+    {
+      "name": "createCommitment",
+      "accounts": [
+        { "name": "config", "isMut": false, "isSigner": false },
+        { "name": "user", "isMut": true, "isSigner": true },
+        { "name": "commitment", "isMut": true, "isSigner": false },
+        { "name": "userSkrAccount", "isMut": true, "isSigner": false },
+        { "name": "vault", "isMut": true, "isSigner": false },
+        { "name": "skrMint", "isMut": false, "isSigner": false },
+        { "name": "tokenProgram", "isMut": false, "isSigner": false },
+        { "name": "systemProgram", "isMut": false, "isSigner": false }
+      ],
+      "args": [
+        { "name": "startTs", "type": "i64" },
+        { "name": "targetWorkouts", "type": "u8" },
+        { "name": "stakeAmount", "type": "u64" },
+        { "name": "durationUnits", "type": "u8" }
+      ]
+    },
+    {
+      "name": "checkIn",
+      "accounts": [
+        { "name": "config", "isMut": false, "isSigner": false },
+        { "name": "gymAuthority", "isMut": true, "isSigner": true },
+        { "name": "gym", "isMut": false, "isSigner": false },
+        { "name": "commitment", "isMut": true, "isSigner": false },
+        { "name": "checkinNonce", "isMut": true, "isSigner": false },
+        { "name": "systemProgram", "isMut": false, "isSigner": false }
+      ],
+      "args": [
+        { "name": "nonce", "type": "u64" },
+        { "name": "qrTs", "type": "i64" }
+      ]
+    },
+    {
+      "name": "attestChallenge",
+      "accounts": [
+        { "name": "config", "isMut": false, "isSigner": false },
+        { "name": "verifierAuthority", "isMut": false, "isSigner": true },
+        { "name": "commitment", "isMut": true, "isSigner": false }
+      ],
+      "args": []
+    },
+    {
+      "name": "checkOut",
+      "accounts": [
+        { "name": "config", "isMut": false, "isSigner": false },
+        { "name": "configAuthority", "isMut": false, "isSigner": false },
+        { "name": "gymAuthority", "isMut": true, "isSigner": true },
+        { "name": "gym", "isMut": false, "isSigner": false },
+        { "name": "commitment", "isMut": true, "isSigner": false },
+        { "name": "checkinNonce", "isMut": true, "isSigner": false },
+        { "name": "fitcoinMint", "isMut": true, "isSigner": false },
+        { "name": "userFitcoinAccount", "isMut": true, "isSigner": false },
+        { "name": "commitmentUser", "isMut": false, "isSigner": false },
+        { "name": "tokenProgram2022", "isMut": false, "isSigner": false },
+        { "name": "associatedTokenProgram", "isMut": false, "isSigner": false },
+        { "name": "systemProgram", "isMut": false, "isSigner": false }
+      ],
+      "args": [
+        { "name": "nonce", "type": "u64" },
+        { "name": "qrTs", "type": "i64" }
+      ]
+    },
+    {
+      "name": "settle",
+      "accounts": [
+        { "name": "config", "isMut": true, "isSigner": false },
+        { "name": "vaultAuthority", "isMut": false, "isSigner": false },
+        { "name": "vault", "isMut": true, "isSigner": false },
+        { "name": "commitment", "isMut": true, "isSigner": false },
+        { "name": "userSkrAccount", "isMut": true, "isSigner": false },
+        { "name": "skrMint", "isMut": false, "isSigner": false },
+        { "name": "tokenProgram", "isMut": false, "isSigner": false }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [],
+  "types": [],
+  "events": [],
+  "errors": [
+    { "code": 6000, "name": "InvalidBonusBps", "msg": "Bônus inválido: bonus_bps vai de 0 a 10000." },
+    { "code": 6001, "name": "InvalidPeriod", "msg": "Período inválido: period_unit_secs precisa ser positivo." },
+    { "code": 6002, "name": "InvalidSessionWindow", "msg": "Janela de sessão inválida: min precisa ser positivo e max >= min." },
+    { "code": 6003, "name": "InvalidGymName", "msg": "Nome da academia inválido (1 a 32 caracteres)." },
+    { "code": 6004, "name": "InvalidTarget", "msg": "Meta inválida: target_workouts precisa ser maior que zero." },
+    { "code": 6005, "name": "InvalidStake", "msg": "Stake inválido: precisa ser maior que zero." },
+    { "code": 6006, "name": "InvalidDuration", "msg": "Duração inválida: duration_units entre 1 e 64." },
+    { "code": 6007, "name": "TargetExceedsDuration", "msg": "Meta maior que a duração do compromisso." },
+    { "code": 6008, "name": "StaleTimestamp", "msg": "Timestamp fora da tolerância de 60s." },
+    { "code": 6009, "name": "StaleQr", "msg": "QR expirado: gere um novo (tolerância de 60s)." },
+    { "code": 6010, "name": "GymInactive", "msg": "Academia desativada." },
+    { "code": 6011, "name": "WrongGymSigner", "msg": "Assinante não é a gym_authority desta academia." },
+    { "code": 6012, "name": "WrongGym", "msg": "Saída precisa ser na mesma academia do check-in." },
+    { "code": 6013, "name": "CommitmentNotActive", "msg": "Compromisso não está ativo." },
+    { "code": 6014, "name": "NotStarted", "msg": "Compromisso ainda não começou." },
+    { "code": 6015, "name": "CommitmentEnded", "msg": "Compromisso já terminou." },
+    { "code": 6016, "name": "SessionAlreadyOpen", "msg": "Já existe sessão aberta neste compromisso." },
+    { "code": 6017, "name": "NoOpenSession", "msg": "Nenhuma sessão aberta neste compromisso." },
+    { "code": 6018, "name": "PeriodAlreadyCounted", "msg": "Este período já teve um treino contado." },
+    { "code": 6019, "name": "ChallengeNotPassed", "msg": "Desafio por foto ainda não aprovado para esta sessão." },
+    { "code": 6020, "name": "SessionTooShort", "msg": "Sessão curta demais (min_session_secs)." },
+    { "code": 6021, "name": "NotAdmin", "msg": "Só o admin pode executar esta instrução." },
+    { "code": 6022, "name": "WrongVerifier", "msg": "Assinante não é o verifier_authority." },
+    { "code": 6023, "name": "NotEnded", "msg": "Compromisso ainda não terminado (settle só após end_ts)." },
+    { "code": 6024, "name": "AlreadySettled", "msg": "Compromisso já liquidado." },
+    { "code": 6025, "name": "Overflow", "msg": "Estouro aritmético." },
+    { "code": 6026, "name": "InvalidMint", "msg": "Mint inválido." },
+    { "code": 6027, "name": "WrongUserAccount", "msg": "Conta de destino não pertence ao dono do compromisso." }
+  ]
+}

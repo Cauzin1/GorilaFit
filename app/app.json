@@ -1,0 +1,19 @@
+{
+  "expo": {
+    "name": "Gorila",
+    "slug": "gorila-proof-of-sweat",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "assetBundlePatterns": ["**/*"],
+    "ios": { "supportsTablet": false, "bundleIdentifier": "com.gorila.proofofsweat" },
+    "android": {
+      "package": "com.gorila.proofofsweat",
+      "intentFilters": []
+    },
+    "plugins": ["expo-camera"],
+    "extra": {
+      "rpcUrl": "https://api.devnet.solana.com"
+    }
+  }
+}

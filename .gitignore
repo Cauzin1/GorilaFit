@@ -1,0 +1,31 @@
+# Segredos
+.env
+.env.*
+!.env.example
+*.keypair.json
+id.json
+/keys/
+
+# Anchor
+/target/
+.anchor/
+test-ledger/
+# Mantém o keypair do programa fora do repo (quem tem ele pode fazer upgrade do programa)
+/target/deploy/*.json
+
+# Node
+node_modules/
+.next/
+.vercel/
+dist/
+
+# Expo / Android
+app/.expo/
+app/android/
+app/ios/
+*.apk
+*.aab
+*.keystore
+
+# SO
+.DS_Store
