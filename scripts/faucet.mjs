@@ -37,8 +37,8 @@ async function main() {
   const provider = anchor.AnchorProvider.local(process.env.SOLANA_RPC_URL ?? "https://api.devnet.solana.com");
   const admin = provider.wallet.payer;
   const mint = new PublicKey(process.env.SKR_MINT);
-  const { value } = (await connection.getTokenSupply(mint)).value;
-  const raw = BigInt(Math.round(amount * 10 ** value.decimals));
+  const supply = (await connection.getTokenSupply(mint)).value;
+  const raw = BigInt(Math.round(amount * 10 ** supply.decimals));
 
   for (const t of targets) {
     const owner = new PublicKey(t);
