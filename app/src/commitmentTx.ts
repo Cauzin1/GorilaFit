@@ -1,6 +1,7 @@
 // Transações do usuário via MWA: create_commitment e settle.
 // O usuário assina e paga a taxa das próprias tx (check-in/out é a academia que assina).
-// IDL em /idl/golias_commit.json (espelha programs/golias_commit/src/lib.rs).
+// IDL em /idl/golias_commit.json: cópia da gerada pelo build (target/idl/).
+// NÃO editar à mão — após `anchor build`, rode `cp target/idl/golias_commit.json idl/`.
 import { AnchorProvider, BN, Program, type Idl } from "@coral-xyz/anchor";
 import { PublicKey, SystemProgram, Transaction } from "@solana/web3.js";
 import {
@@ -87,7 +88,7 @@ export async function createCommitment(
   const program = programFor(user);
   const tx = await program.methods
     .createCommitment(new BN(startTs), targetWorkouts, new BN(stakeAmount.toString()), durationUnits)
-    .accounts({
+    .accountsPartial({
       config: configPda(),
       user,
       commitment,
@@ -116,7 +117,7 @@ export async function settleCommitment(user: PublicKey, commitment: PublicKey): 
   }
   const settleIx = await program.methods
     .settle()
-    .accounts({
+    .accountsPartial({
       config: configPda(),
       vaultAuthority: PublicKey.findProgramAddressSync([Buffer.from("vault")], PROGRAM_ID)[0],
       vault: vaultPda(),

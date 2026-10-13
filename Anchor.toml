@@ -3,10 +3,10 @@ seeds = true
 skip-lint = false
 
 [programs.devnet]
-golias_commit = "9Aa5qLry7p6rtJhevZ3ugFyffGqffvvcgEmdTq4LX75Z"
+golias_commit = "FTJr6wZ6NLvzCkE3VwpEUPX8yjHgxdcve1oPdUWYdr8i"
 
 [programs.localnet]
-golias_commit = "9Aa5qLry7p6rtJhevZ3ugFyffGqffvvcgEmdTq4LX75Z"
+golias_commit = "FTJr6wZ6NLvzCkE3VwpEUPX8yjHgxdcve1oPdUWYdr8i"
 
 [provider]
 cluster = "devnet"

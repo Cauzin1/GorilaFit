@@ -1,150 +1,995 @@
 {
-  "version": "0.1.0",
-  "name": "golias_commit",
-  "address": "9Aa5qLry7p6rtJhevZ3ugFyffGqffvvcgEmdTq4LX75Z",
-  "metadata": { "address": "9Aa5qLry7p6rtJhevZ3ugFyffGqffvvcgEmdTq4LX75Z" },
+  "address": "FTJr6wZ6NLvzCkE3VwpEUPX8yjHgxdcve1oPdUWYdr8i",
+  "metadata": {
+    "name": "golias_commit",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Gorila: Proof of Sweat — compromisso semanal com stake em SKR"
+  },
   "instructions": [
     {
-      "name": "initializeConfig",
-      "accounts": [
-        { "name": "admin", "isMut": true, "isSigner": true },
-        { "name": "verifierAuthority", "isMut": false, "isSigner": false },
-        { "name": "skrMint", "isMut": false, "isSigner": false },
-        { "name": "fitcoinMint", "isMut": false, "isSigner": false },
-        { "name": "config", "isMut": true, "isSigner": false },
-        { "name": "vaultAuthority", "isMut": false, "isSigner": false },
-        { "name": "vault", "isMut": true, "isSigner": false },
-        { "name": "tokenProgram", "isMut": false, "isSigner": false },
-        { "name": "systemProgram", "isMut": false, "isSigner": false }
+      "name": "attest_challenge",
+      "discriminator": [
+        176,
+        41,
+        235,
+        76,
+        128,
+        202,
+        59,
+        17
       ],
-      "args": [
-        { "name": "bonusBps", "type": "u16" },
-        { "name": "fitcoinPerWorkout", "type": "u64" },
-        { "name": "periodUnitSecs", "type": "i64" },
-        { "name": "minSessionSecs", "type": "i64" },
-        { "name": "maxSessionSecs", "type": "i64" }
-      ]
-    },
-    {
-      "name": "registerGym",
       "accounts": [
-        { "name": "config", "isMut": true, "isSigner": false },
-        { "name": "admin", "isMut": true, "isSigner": true },
-        { "name": "gymAuthority", "isMut": false, "isSigner": false },
-        { "name": "gym", "isMut": true, "isSigner": false },
-        { "name": "systemProgram", "isMut": false, "isSigner": false }
-      ],
-      "args": [{ "name": "name", "type": "string" }]
-    },
-    {
-      "name": "createCommitment",
-      "accounts": [
-        { "name": "config", "isMut": false, "isSigner": false },
-        { "name": "user", "isMut": true, "isSigner": true },
-        { "name": "commitment", "isMut": true, "isSigner": false },
-        { "name": "userSkrAccount", "isMut": true, "isSigner": false },
-        { "name": "vault", "isMut": true, "isSigner": false },
-        { "name": "skrMint", "isMut": false, "isSigner": false },
-        { "name": "tokenProgram", "isMut": false, "isSigner": false },
-        { "name": "systemProgram", "isMut": false, "isSigner": false }
-      ],
-      "args": [
-        { "name": "startTs", "type": "i64" },
-        { "name": "targetWorkouts", "type": "u8" },
-        { "name": "stakeAmount", "type": "u64" },
-        { "name": "durationUnits", "type": "u8" }
-      ]
-    },
-    {
-      "name": "checkIn",
-      "accounts": [
-        { "name": "config", "isMut": false, "isSigner": false },
-        { "name": "gymAuthority", "isMut": true, "isSigner": true },
-        { "name": "gym", "isMut": false, "isSigner": false },
-        { "name": "commitment", "isMut": true, "isSigner": false },
-        { "name": "checkinNonce", "isMut": true, "isSigner": false },
-        { "name": "systemProgram", "isMut": false, "isSigner": false }
-      ],
-      "args": [
-        { "name": "nonce", "type": "u64" },
-        { "name": "qrTs", "type": "i64" }
-      ]
-    },
-    {
-      "name": "attestChallenge",
-      "accounts": [
-        { "name": "config", "isMut": false, "isSigner": false },
-        { "name": "verifierAuthority", "isMut": false, "isSigner": true },
-        { "name": "commitment", "isMut": true, "isSigner": false }
+        {
+          "name": "config"
+        },
+        {
+          "name": "verifier_authority",
+          "signer": true,
+          "relations": [
+            "config"
+          ]
+        },
+        {
+          "name": "commitment",
+          "writable": true
+        }
       ],
       "args": []
     },
     {
-      "name": "checkOut",
+      "name": "check_in",
+      "discriminator": [
+        209,
+        253,
+        4,
+        217,
+        250,
+        241,
+        207,
+        50
+      ],
       "accounts": [
-        { "name": "config", "isMut": false, "isSigner": false },
-        { "name": "configAuthority", "isMut": false, "isSigner": false },
-        { "name": "gymAuthority", "isMut": true, "isSigner": true },
-        { "name": "gym", "isMut": false, "isSigner": false },
-        { "name": "commitment", "isMut": true, "isSigner": false },
-        { "name": "checkinNonce", "isMut": true, "isSigner": false },
-        { "name": "fitcoinMint", "isMut": true, "isSigner": false },
-        { "name": "userFitcoinAccount", "isMut": true, "isSigner": false },
-        { "name": "commitmentUser", "isMut": false, "isSigner": false },
-        { "name": "tokenProgram2022", "isMut": false, "isSigner": false },
-        { "name": "associatedTokenProgram", "isMut": false, "isSigner": false },
-        { "name": "systemProgram", "isMut": false, "isSigner": false }
+        {
+          "name": "config"
+        },
+        {
+          "name": "gym_authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "gym",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  121,
+                  109
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "gym_authority"
+              }
+            ]
+          }
+        },
+        {
+          "name": "commitment",
+          "writable": true
+        },
+        {
+          "name": "checkin_nonce",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  104,
+                  101,
+                  99,
+                  107,
+                  105,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "commitment"
+              },
+              {
+                "kind": "arg",
+                "path": "nonce"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
       ],
       "args": [
-        { "name": "nonce", "type": "u64" },
-        { "name": "qrTs", "type": "i64" }
+        {
+          "name": "nonce",
+          "type": "u64"
+        },
+        {
+          "name": "qr_ts",
+          "type": "i64"
+        }
+      ]
+    },
+    {
+      "name": "check_out",
+      "discriminator": [
+        59,
+        69,
+        195,
+        98,
+        213,
+        30,
+        201,
+        186
+      ],
+      "accounts": [
+        {
+          "name": "config"
+        },
+        {
+          "name": "config_authority",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "gym_authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "gym",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  121,
+                  109
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "gym_authority"
+              }
+            ]
+          }
+        },
+        {
+          "name": "commitment",
+          "writable": true
+        },
+        {
+          "name": "checkin_nonce",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  104,
+                  101,
+                  99,
+                  107,
+                  105,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "commitment"
+              },
+              {
+                "kind": "arg",
+                "path": "nonce"
+              }
+            ]
+          }
+        },
+        {
+          "name": "fitcoin_mint",
+          "writable": true
+        },
+        {
+          "name": "user_fitcoin_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "commitment_user"
+              },
+              {
+                "kind": "account",
+                "path": "token_program_2022"
+              },
+              {
+                "kind": "account",
+                "path": "fitcoin_mint"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                140,
+                151,
+                37,
+                143,
+                78,
+                36,
+                137,
+                241,
+                187,
+                61,
+                16,
+                41,
+                20,
+                142,
+                13,
+                131,
+                11,
+                90,
+                19,
+                153,
+                218,
+                255,
+                16,
+                132,
+                4,
+                142,
+                123,
+                216,
+                219,
+                233,
+                248,
+                89
+              ]
+            }
+          }
+        },
+        {
+          "name": "commitment_user"
+        },
+        {
+          "name": "token_program_2022"
+        },
+        {
+          "name": "associated_token_program",
+          "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "nonce",
+          "type": "u64"
+        },
+        {
+          "name": "qr_ts",
+          "type": "i64"
+        }
+      ]
+    },
+    {
+      "name": "create_commitment",
+      "discriminator": [
+        232,
+        31,
+        118,
+        65,
+        229,
+        2,
+        2,
+        170
+      ],
+      "accounts": [
+        {
+          "name": "config"
+        },
+        {
+          "name": "user",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "commitment",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  109,
+                  109,
+                  105,
+                  116,
+                  109,
+                  101,
+                  110,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "user"
+              },
+              {
+                "kind": "arg",
+                "path": "start_ts"
+              }
+            ]
+          }
+        },
+        {
+          "name": "user_skr_account",
+          "writable": true
+        },
+        {
+          "name": "vault",
+          "writable": true
+        },
+        {
+          "name": "skr_mint"
+        },
+        {
+          "name": "token_program"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "start_ts",
+          "type": "i64"
+        },
+        {
+          "name": "target_workouts",
+          "type": "u8"
+        },
+        {
+          "name": "stake_amount",
+          "type": "u64"
+        },
+        {
+          "name": "duration_units",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "initialize_config",
+      "discriminator": [
+        208,
+        127,
+        21,
+        1,
+        194,
+        190,
+        196,
+        70
+      ],
+      "accounts": [
+        {
+          "name": "admin",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "verifier_authority"
+        },
+        {
+          "name": "skr_mint"
+        },
+        {
+          "name": "fitcoin_mint"
+        },
+        {
+          "name": "config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "vault_authority",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116,
+                  45,
+                  116,
+                  111,
+                  107,
+                  101,
+                  110
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "token_program"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "bonus_bps",
+          "type": "u16"
+        },
+        {
+          "name": "fitcoin_per_workout",
+          "type": "u64"
+        },
+        {
+          "name": "period_unit_secs",
+          "type": "i64"
+        },
+        {
+          "name": "min_session_secs",
+          "type": "i64"
+        },
+        {
+          "name": "max_session_secs",
+          "type": "i64"
+        }
+      ]
+    },
+    {
+      "name": "register_gym",
+      "discriminator": [
+        14,
+        233,
+        249,
+        1,
+        21,
+        15,
+        30,
+        189
+      ],
+      "accounts": [
+        {
+          "name": "config",
+          "writable": true
+        },
+        {
+          "name": "admin",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "config"
+          ]
+        },
+        {
+          "name": "gym_authority"
+        },
+        {
+          "name": "gym",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  121,
+                  109
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "gym_authority"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "name",
+          "type": "string"
+        }
       ]
     },
     {
       "name": "settle",
+      "discriminator": [
+        175,
+        42,
+        185,
+        87,
+        144,
+        131,
+        102,
+        212
+      ],
       "accounts": [
-        { "name": "config", "isMut": true, "isSigner": false },
-        { "name": "vaultAuthority", "isMut": false, "isSigner": false },
-        { "name": "vault", "isMut": true, "isSigner": false },
-        { "name": "commitment", "isMut": true, "isSigner": false },
-        { "name": "userSkrAccount", "isMut": true, "isSigner": false },
-        { "name": "skrMint", "isMut": false, "isSigner": false },
-        { "name": "tokenProgram", "isMut": false, "isSigner": false }
+        {
+          "name": "config",
+          "writable": true
+        },
+        {
+          "name": "vault_authority",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "vault",
+          "writable": true
+        },
+        {
+          "name": "commitment",
+          "writable": true
+        },
+        {
+          "name": "user_skr_account",
+          "writable": true
+        },
+        {
+          "name": "skr_mint"
+        },
+        {
+          "name": "token_program"
+        }
       ],
       "args": []
     }
   ],
-  "accounts": [],
-  "types": [],
-  "events": [],
+  "accounts": [
+    {
+      "name": "CheckinNonce",
+      "discriminator": [
+        74,
+        35,
+        103,
+        96,
+        213,
+        80,
+        12,
+        33
+      ]
+    },
+    {
+      "name": "Commitment",
+      "discriminator": [
+        61,
+        112,
+        129,
+        128,
+        24,
+        147,
+        77,
+        87
+      ]
+    },
+    {
+      "name": "Config",
+      "discriminator": [
+        155,
+        12,
+        170,
+        224,
+        30,
+        250,
+        204,
+        130
+      ]
+    },
+    {
+      "name": "Gym",
+      "discriminator": [
+        106,
+        7,
+        149,
+        4,
+        207,
+        231,
+        184,
+        159
+      ]
+    }
+  ],
   "errors": [
-    { "code": 6000, "name": "InvalidBonusBps", "msg": "Bônus inválido: bonus_bps vai de 0 a 10000." },
-    { "code": 6001, "name": "InvalidPeriod", "msg": "Período inválido: period_unit_secs precisa ser positivo." },
-    { "code": 6002, "name": "InvalidSessionWindow", "msg": "Janela de sessão inválida: min precisa ser positivo e max >= min." },
-    { "code": 6003, "name": "InvalidGymName", "msg": "Nome da academia inválido (1 a 32 caracteres)." },
-    { "code": 6004, "name": "InvalidTarget", "msg": "Meta inválida: target_workouts precisa ser maior que zero." },
-    { "code": 6005, "name": "InvalidStake", "msg": "Stake inválido: precisa ser maior que zero." },
-    { "code": 6006, "name": "InvalidDuration", "msg": "Duração inválida: duration_units entre 1 e 64." },
-    { "code": 6007, "name": "TargetExceedsDuration", "msg": "Meta maior que a duração do compromisso." },
-    { "code": 6008, "name": "StaleTimestamp", "msg": "Timestamp fora da tolerância de 60s." },
-    { "code": 6009, "name": "StaleQr", "msg": "QR expirado: gere um novo (tolerância de 60s)." },
-    { "code": 6010, "name": "GymInactive", "msg": "Academia desativada." },
-    { "code": 6011, "name": "WrongGymSigner", "msg": "Assinante não é a gym_authority desta academia." },
-    { "code": 6012, "name": "WrongGym", "msg": "Saída precisa ser na mesma academia do check-in." },
-    { "code": 6013, "name": "CommitmentNotActive", "msg": "Compromisso não está ativo." },
-    { "code": 6014, "name": "NotStarted", "msg": "Compromisso ainda não começou." },
-    { "code": 6015, "name": "CommitmentEnded", "msg": "Compromisso já terminou." },
-    { "code": 6016, "name": "SessionAlreadyOpen", "msg": "Já existe sessão aberta neste compromisso." },
-    { "code": 6017, "name": "NoOpenSession", "msg": "Nenhuma sessão aberta neste compromisso." },
-    { "code": 6018, "name": "PeriodAlreadyCounted", "msg": "Este período já teve um treino contado." },
-    { "code": 6019, "name": "ChallengeNotPassed", "msg": "Desafio por foto ainda não aprovado para esta sessão." },
-    { "code": 6020, "name": "SessionTooShort", "msg": "Sessão curta demais (min_session_secs)." },
-    { "code": 6021, "name": "NotAdmin", "msg": "Só o admin pode executar esta instrução." },
-    { "code": 6022, "name": "WrongVerifier", "msg": "Assinante não é o verifier_authority." },
-    { "code": 6023, "name": "NotEnded", "msg": "Compromisso ainda não terminado (settle só após end_ts)." },
-    { "code": 6024, "name": "AlreadySettled", "msg": "Compromisso já liquidado." },
-    { "code": 6025, "name": "Overflow", "msg": "Estouro aritmético." },
-    { "code": 6026, "name": "InvalidMint", "msg": "Mint inválido." },
-    { "code": 6027, "name": "WrongUserAccount", "msg": "Conta de destino não pertence ao dono do compromisso." }
+    {
+      "code": 6000,
+      "name": "InvalidBonusBps",
+      "msg": "Bônus inválido: bonus_bps vai de 0 a 10000."
+    },
+    {
+      "code": 6001,
+      "name": "InvalidPeriod",
+      "msg": "Período inválido: period_unit_secs precisa ser positivo."
+    },
+    {
+      "code": 6002,
+      "name": "InvalidSessionWindow",
+      "msg": "Janela de sessão inválida: min precisa ser positivo e max >= min."
+    },
+    {
+      "code": 6003,
+      "name": "InvalidGymName",
+      "msg": "Nome da academia inválido (1 a 32 caracteres)."
+    },
+    {
+      "code": 6004,
+      "name": "InvalidTarget",
+      "msg": "Meta inválida: target_workouts precisa ser maior que zero."
+    },
+    {
+      "code": 6005,
+      "name": "InvalidStake",
+      "msg": "Stake inválido: precisa ser maior que zero."
+    },
+    {
+      "code": 6006,
+      "name": "InvalidDuration",
+      "msg": "Duração inválida: duration_units entre 1 e 64."
+    },
+    {
+      "code": 6007,
+      "name": "TargetExceedsDuration",
+      "msg": "Meta maior que a duração do compromisso."
+    },
+    {
+      "code": 6008,
+      "name": "StaleTimestamp",
+      "msg": "Timestamp fora da tolerância de 60s."
+    },
+    {
+      "code": 6009,
+      "name": "StaleQr",
+      "msg": "QR expirado: gere um novo (tolerância de 60s)."
+    },
+    {
+      "code": 6010,
+      "name": "GymInactive",
+      "msg": "Academia desativada."
+    },
+    {
+      "code": 6011,
+      "name": "WrongGymSigner",
+      "msg": "Assinante não é a gym_authority desta academia."
+    },
+    {
+      "code": 6012,
+      "name": "WrongGym",
+      "msg": "Saída precisa ser na mesma academia do check-in."
+    },
+    {
+      "code": 6013,
+      "name": "CommitmentNotActive",
+      "msg": "Compromisso não está ativo."
+    },
+    {
+      "code": 6014,
+      "name": "NotStarted",
+      "msg": "Compromisso ainda não começou."
+    },
+    {
+      "code": 6015,
+      "name": "CommitmentEnded",
+      "msg": "Compromisso já terminou."
+    },
+    {
+      "code": 6016,
+      "name": "SessionAlreadyOpen",
+      "msg": "Já existe sessão aberta neste compromisso."
+    },
+    {
+      "code": 6017,
+      "name": "NoOpenSession",
+      "msg": "Nenhuma sessão aberta neste compromisso."
+    },
+    {
+      "code": 6018,
+      "name": "PeriodAlreadyCounted",
+      "msg": "Este período já teve um treino contado."
+    },
+    {
+      "code": 6019,
+      "name": "ChallengeNotPassed",
+      "msg": "Desafio por foto ainda não aprovado para esta sessão."
+    },
+    {
+      "code": 6020,
+      "name": "SessionTooShort",
+      "msg": "Sessão curta demais (min_session_secs)."
+    },
+    {
+      "code": 6021,
+      "name": "NotAdmin",
+      "msg": "Só o admin pode executar esta instrução."
+    },
+    {
+      "code": 6022,
+      "name": "WrongVerifier",
+      "msg": "Assinante não é o verifier_authority."
+    },
+    {
+      "code": 6023,
+      "name": "NotEnded",
+      "msg": "Compromisso ainda não terminou (settle só após end_ts)."
+    },
+    {
+      "code": 6024,
+      "name": "AlreadySettled",
+      "msg": "Compromisso já liquidado."
+    },
+    {
+      "code": 6025,
+      "name": "Overflow",
+      "msg": "Estouro aritmético."
+    },
+    {
+      "code": 6026,
+      "name": "WrongUserAccount",
+      "msg": "Conta de destino não pertence ao dono do compromisso."
+    },
+    {
+      "code": 6027,
+      "name": "InvalidMint",
+      "msg": "Mint inválido."
+    }
+  ],
+  "types": [
+    {
+      "name": "CheckinNonce",
+      "type": {
+        "kind": "struct",
+        "fields": []
+      }
+    },
+    {
+      "name": "Commitment",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "user",
+            "type": "pubkey"
+          },
+          {
+            "name": "target_workouts",
+            "type": "u8"
+          },
+          {
+            "name": "completed",
+            "type": "u8"
+          },
+          {
+            "name": "stake_amount",
+            "type": "u64"
+          },
+          {
+            "name": "start_ts",
+            "type": "i64"
+          },
+          {
+            "name": "end_ts",
+            "type": "i64"
+          },
+          {
+            "name": "checkin_bitmask",
+            "type": "u64"
+          },
+          {
+            "name": "open_session_start",
+            "type": "i64"
+          },
+          {
+            "name": "open_session_gym",
+            "type": "pubkey"
+          },
+          {
+            "name": "challenge_passed",
+            "type": "bool"
+          },
+          {
+            "name": "status",
+            "type": {
+              "defined": {
+                "name": "CommitmentStatus"
+              }
+            }
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CommitmentStatus",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Active"
+          },
+          {
+            "name": "Won"
+          },
+          {
+            "name": "Lost"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Config",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "admin",
+            "type": "pubkey"
+          },
+          {
+            "name": "verifier_authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "skr_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "fitcoin_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "vault",
+            "type": "pubkey"
+          },
+          {
+            "name": "bonus_bps",
+            "type": "u16"
+          },
+          {
+            "name": "fitcoin_per_workout",
+            "type": "u64"
+          },
+          {
+            "name": "period_unit_secs",
+            "type": "i64"
+          },
+          {
+            "name": "min_session_secs",
+            "type": "i64"
+          },
+          {
+            "name": "max_session_secs",
+            "type": "i64"
+          },
+          {
+            "name": "pool_balance",
+            "type": "u64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "vault_authority_bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Gym",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "gym_authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "active",
+            "type": "bool"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    }
   ]
 }

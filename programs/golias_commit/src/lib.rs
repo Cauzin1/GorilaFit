@@ -12,12 +12,14 @@
 // - Foto do desafio: descartada após julgamento, nunca armazenar (tratado na web).
 
 use anchor_lang::prelude::*;
+use anchor_spl::associated_token::AssociatedToken;
 use anchor_spl::token_interface::{self, Mint, TokenAccount, TokenInterface};
 
-// Keypair em /tmp/golias-keypair.json (gerado no scaffold; antes do deploy real,
-// gere o seu com `solana-keygen new -o target/deploy/golias_commit-keypair.json`
-// e atualize este ID + Anchor.toml + .env PROGRAM_ID).
-declare_id!("9Aa5qLry7p6rtJhevZ3ugFyffGqffvvcgEmdTq4LX75Z");
+// Keypair do programa em target/deploy/golias_commit-keypair.json (gerado pelo
+// `anchor build`). Este ID == `anchor keys list` == Anchor.toml. Para rotacionar:
+// gere novo keypair, rode `anchor keys sync` e atualize o .env (PROGRAM_ID +
+// EXPO_PUBLIC_PROGRAM_ID).
+declare_id!("FTJr6wZ6NLvzCkE3VwpEUPX8yjHgxdcve1oPdUWYdr8i");
 
 const QR_FRESHNESS_SECS: i64 = 60;
 const MAX_NAME_LEN: usize = 32;
@@ -569,7 +571,7 @@ pub struct CheckOut<'info> {
     #[account(address = commitment.user)]
     pub commitment_user: UncheckedAccount<'info>,
     pub token_program_2022: Interface<'info, TokenInterface>,
-    pub associated_token_program: Program<'info, anchor_spl::associated_token::AssociatedToken>,
+    pub associated_token_program: Program<'info, AssociatedToken>,
     pub system_program: Program<'info, System>,
 }
 
