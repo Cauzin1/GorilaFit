@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-// Gera a meta semanal com Groq (Llama 3.3), resposta em JSON estrito.
+// Gera a meta semanal com Groq (gpt-oss-120b), resposta em JSON estrito.
 // Entrada: { level, history } — nível do usuário + resumo do histórico.
 // Saída: { targetWorkouts, durationUnits, suggestion }.
 export async function POST(req: Request) {
@@ -21,7 +21,7 @@ export async function POST(req: Request) {
       method: "POST",
       headers: { authorization: `Bearer ${apiKey}`, "content-type": "application/json" },
       body: JSON.stringify({
-        model: "llama-3.3-70b-versatile",
+        model: "openai/gpt-oss-120b",
         temperature: 0.7,
         response_format: { type: "json_object" },
         messages: [
