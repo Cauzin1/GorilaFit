@@ -4,7 +4,7 @@
 //
 // Ordem: mock SKR (SPL) -> FitCoin (Token-2022 NonTransferable, mint authority = PDA config)
 // -> initialize_config -> register_gym (academia de teste).
-import "dotenv/config";
+import dotenv from "dotenv";
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -25,6 +25,8 @@ import bs58 from "bs58";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const ENV_PATH = join(ROOT, ".env");
+// Carrega o .env da raiz independente do cwd (npm --workspace roda em scripts/).
+dotenv.config({ path: ENV_PATH });
 
 function loadEnv() {
   // dotenv já carregou; garante chaves obrigatórias de servidor.

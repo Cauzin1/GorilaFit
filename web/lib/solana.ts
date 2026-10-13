@@ -1,10 +1,11 @@
 // Helpers de servidor: lê Commitment on-chain e monta check_in/check_out.
 // Chaves GYM_SECRET_KEY e VERIFIER_SECRET_KEY: só aqui no servidor, nunca no app.
-import { readFileSync, existsSync } from "node:fs";
-import { join } from "node:path";
 import * as anchor from "@coral-xyz/anchor";
 import { Connection, Keypair, PublicKey, SystemProgram } from "@solana/web3.js";
 import bs58 from "bs58";
+// IDL commitada (cópia da gerada em target/idl). Import estático = webpack embute
+// no bundle serverless, então funciona no Vercel (target/ é gitignored).
+import idlJson from "../../idl/golias_commit.json";
 
 export function connection() {
   return new Connection(process.env.SOLANA_RPC_URL ?? "https://api.devnet.solana.com", "confirmed");
@@ -52,10 +53,7 @@ export class ServerWallet {
 
 export async function loadProgram(conn: Connection, keypair: Keypair) {
   const provider = new anchor.AnchorProvider(conn, new ServerWallet(keypair), { commitment: "confirmed" });
-  const idlPath = join(process.cwd(), "..", "target", "idl", "golias_commit.json");
-  if (!existsSync(idlPath)) throw new Error("IDL ausente. Rode `anchor build` primeiro.");
-  const idl = JSON.parse(readFileSync(idlPath, "utf8"));
-  return new anchor.Program(idl, provider);
+  return new anchor.Program(idlJson as anchor.Idl, provider);
 }
 
 export async function readCommitment(conn: Connection, commitment: PublicKey) {
